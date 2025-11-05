@@ -15,7 +15,7 @@ spec:
       containers:
       - name: flask-load-balancer
         # TODO: Replace <DockerHub-Username> with your Docker Hub username, and use the appropriate image name and tag
-        image: <DockerHub-Username>/<load-balancer-image-name>:<load-balancer-image-tag>
+        image: blessedmadukoma/mlip-lab9-loadbalancer-image:latest
         ports:
         - containerPort: 8080
 ---
@@ -24,11 +24,12 @@ kind: Service
 metadata:
   name: flask-load-balancer-service 
 spec:
-  type: NodePort
+  type: NodePort  # NodePort for external access in Minikube
+  # type: LoadBalancer
   selector:
     app: flask-load-balancer
   ports:
     - name: http
       port: 8080          # service port inside cluster
       targetPort: 8080    # pod/container port
-      nodePort: 30080   
+      nodePort: 30080     # External port to access the service   

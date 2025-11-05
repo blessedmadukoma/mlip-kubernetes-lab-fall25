@@ -41,9 +41,19 @@ k8-deploy:
 	kubectl apply -f backend-deployment.yaml
 	
 	@echo "Applying load balancer deployment..."
-	kubectl apply -f loadbalancer-deployment.yaml
+	kubectl apply -f load-balancer-deployment.yaml
 
 	@echo "======= Deployment Complete ======="
+
+deploy: build-push k8-deploy
+
+services:
+	kubectl get services
+
+# I need to start this to get the port for testing the cURL
+url:
+	@echo "Usage: make url name=<service-name> e.g. make url name=flask-load-balancer-service"
+	@minikube service $(name) --url
 
 cube-curl:
 	curl "http://192.168.49.2:8443/?user_id=Alice"

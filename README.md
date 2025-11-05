@@ -108,7 +108,7 @@ Access the Load Balancer and Test Traffic
   ```
 - Access the load balancer using `curl` (replace `<minikube-ip>` with the output from `minikube ip`):
   ```
-  curl "http://<minikube-ip>:30080/?user_id=Alice"
+  curl "http://192.168.49.2:30080/?user_id=Alice"
   ```
 
 2. **Use `minikube service` (If NodePort Does Not Work)**:
